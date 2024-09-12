@@ -69,7 +69,8 @@ int main()
     printf("Begin Size: %ld, %ld\n", sizeof(t1), sizeof(t2)); 
     printf("T1: %c, %c, %s\n", t1->num1, t1->num2, t1->num3);
     printf("T2: %c, %c, %s\n", t2.num1, t2.num2, t2.num3);
-
+    free(t1);
+    free(t2.num3);
     return 0;
 }
 // Begin Size: 8, 16
