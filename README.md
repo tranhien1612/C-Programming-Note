@@ -2,14 +2,6 @@
 
 ## Using *void to point to function
 ```
-/******************************************************************************
-
-Welcome to GDB Online.
-GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
-C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
-Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
 #include <stdio.h>
 
 void hello();
@@ -40,4 +32,47 @@ int main()
     return 0;
 }
 
+```
+## Flexible Array Memory
+```
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+typedef struct {
+    char num1;
+    char num2;
+    char num3[];
+} str1;
+
+typedef struct {
+    char num1;
+    char num2;
+    char *num3;
+} str2;
+
+
+int main()
+{
+    str1 *t1 = (str1 *) malloc( sizeof(*t1) + (sizeof(char) * strlen("David")) );
+    t1->num1 = 'A';
+    t1->num2 = 'B';
+    strcpy(t1->num3, "David");
+    str2 t2 = {
+        .num1 = 'A',
+        .num2 = 'B'
+    };
+    t2.num3 = (char *) malloc( sizeof(char) * strlen("David") );
+    strcpy(t2.num3, "David");
+    
+    printf("Begin Size: %ld, %ld\n", sizeof(t1), sizeof(t2)); 
+    printf("T1: %c, %c, %s\n", t1->num1, t1->num2, t1->num3);
+    printf("T2: %c, %c, %s\n", t2.num1, t2.num2, t2.num3);
+
+    return 0;
+}
+// Begin Size: 8, 16
+// T1: A, B, David
+// T2: A, B, David
 ```
